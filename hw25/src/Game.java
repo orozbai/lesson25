@@ -5,10 +5,11 @@ public class Game {
     private int userScore;
     private int computerScore;
     private int numberOfGames;
-    private int tie;
     Scanner scanner = new Scanner(System.in);
 
-    public void gameAction() {
+    public String gameAction() {
+        numberOfGames++;
+        String str = "";
         Move userMove = movePlayer();
         Move computerMove = moveComputer();
         System.out.println("\nВаш ход " + userMove);
@@ -17,7 +18,6 @@ public class Game {
         // узнать победителя
         if (userMove == computerMove) {
             System.out.println("Ничья");
-            tie++;
         } else if (userMove == Move.ROCK && computerMove == Move.SCISSORS ||
                 userMove == Move.PAPER && computerMove == Move.ROCK ||
                 userMove == Move.SCISSORS && computerMove == Move.PAPER) {
@@ -27,8 +27,46 @@ public class Game {
             System.out.println("Компьютер победил");
             computerScore++;
         }
+        boolean ans = playAgain();
+        if (ans) {
+            return gameAction();
+        } else {
+            printScoreBoard();
+        }
+        return str;
+    }
 
+    public void printScoreBoard() {
+        int wins = userScore;
+        int losses = computerScore;
+        int ties = numberOfGames - userScore - computerScore;
+        double percentageWon = (wins + ((double) ties) / 2) / numberOfGames;
 
+        System.out.print("+");
+        printDashes(68);
+        System.out.println("+");
+
+        System.out.printf("| %6s | %6s | %6s | %12s | %14s |\n",
+                "ПОБЕДА", "ПОРАЖЕНИЕ", "НИЧЬЯ", "ВСЕГО ИГР", "ПРОЦЕНТ ПОБЕД");
+
+        System.out.print("|");
+        printDashes(10);
+        System.out.print("+");
+        printDashes(10);
+        System.out.print("+");
+        printDashes(10);
+        System.out.print("+");
+        printDashes(16);
+        System.out.print("+");
+        printDashes(18);
+        System.out.println("|");
+
+        System.out.printf("| %6d | %6d | %6d| %12d | %13.2f%% |\n",
+                wins, losses, ties, numberOfGames, percentageWon * 100);
+
+        System.out.print("+");
+        printDashes(68);
+        System.out.println("+");
     }
 
 
@@ -65,8 +103,14 @@ public class Game {
         return movePlayer();
     }
 
+    public void printDashes(int num) {
+        for (int i = 0; i < num; i++) {
+            System.out.print("-");
+        }
+    }
+
     public boolean playAgain() {
-        System.out.println("Сыграть еще раз? (введите y или n)");
+        System.out.println("Сыграть еще раз? (введите Y если да. иначе любую другую букву)");
         String userInput = scanner.nextLine();
         userInput = userInput.toUpperCase();
         return userInput.charAt(0) == 'Y';
