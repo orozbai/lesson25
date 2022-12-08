@@ -43,29 +43,29 @@ public class Game {
         double percentageWon = (wins + ((double) ties) / 2) / numberOfGames;
 
         System.out.print("+");
-        printDashes(68);
+        printDashes(61);
         System.out.println("+");
 
         System.out.printf("| %6s | %6s | %6s | %12s | %14s |\n",
                 "ПОБЕДА", "ПОРАЖЕНИЕ", "НИЧЬЯ", "ВСЕГО ИГР", "ПРОЦЕНТ ПОБЕД");
 
         System.out.print("|");
-        printDashes(10);
+        printDashes(8);
         System.out.print("+");
-        printDashes(10);
+        printDashes(11);
         System.out.print("+");
-        printDashes(10);
+        printDashes(8);
+        System.out.print("+");
+        printDashes(14);
         System.out.print("+");
         printDashes(16);
-        System.out.print("+");
-        printDashes(18);
         System.out.println("|");
 
-        System.out.printf("| %6d | %6d | %6d| %12d | %13.2f%% |\n",
+        System.out.printf("| %6d | %9d | %7d| %12d | %13.2f%% |\n",
                 wins, losses, ties, numberOfGames, percentageWon * 100);
 
         System.out.print("+");
-        printDashes(68);
+        printDashes(61);
         System.out.println("+");
     }
 
