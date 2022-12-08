@@ -2,13 +2,43 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
+    private int userScore;
+    private int computerScore;
+    private int numberOfGames;
+    private int tie;
     Scanner scanner = new Scanner(System.in);
+
+    public void gameAction() {
+        Move userMove = movePlayer();
+        Move computerMove = moveComputer();
+        System.out.println("\nВаш ход " + userMove);
+        System.out.println("Ход компьютера " + computerMove);
+
+        // узнать победителя
+        if (userMove == computerMove) {
+            System.out.println("Ничья");
+            tie++;
+        } else if (userMove == Move.ROCK && computerMove == Move.SCISSORS ||
+                userMove == Move.PAPER && computerMove == Move.ROCK ||
+                userMove == Move.SCISSORS && computerMove == Move.PAPER) {
+            System.out.println("Ты победил");
+            userScore++;
+        } else {
+            System.out.println("Компьютер победил");
+            computerScore++;
+        }
+
+
+    }
 
 
     public Game() {
+        userScore = 0;
+        computerScore = 0;
+        numberOfGames = 0;
     }
 
-    public Move getMove() {
+    public Move moveComputer() {
         Move[] moves = Move.values();
         Random random = new Random();
         int index = random.nextInt(moves.length);
