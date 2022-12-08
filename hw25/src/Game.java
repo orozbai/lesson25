@@ -2,6 +2,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
+    Scanner scanner = new Scanner(System.in);
+
 
     public Game() {
     }
@@ -14,7 +16,6 @@ public class Game {
     }
 
     public Move movePlayer() {
-        Scanner scanner = new Scanner(System.in);
         String playerMove;
         System.out.println("Введите: rock paper или scissors или первую букву r p или s");
         playerMove = scanner.nextLine();
@@ -30,6 +31,14 @@ public class Game {
                     return Move.ROCK;
             }
         }
+        System.out.println("Некоректный ввод");
         return movePlayer();
+    }
+
+    public boolean playAgain() {
+        System.out.println("Сыграть еще раз? (введите y или n)");
+        String userInput = scanner.nextLine();
+        userInput = userInput.toUpperCase();
+        return userInput.charAt(0) == 'Y';
     }
 }
