@@ -1,41 +1,35 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
-    public static void rockPaperScissors() {
+
+    public Game() {
+    }
+
+    public Move getMove() {
+        Move[] moves = Move.values();
+        Random random = new Random();
+        int index = random.nextInt(moves.length);
+        return moves[index];
+    }
+
+    public Move movePlayer() {
         Scanner scanner = new Scanner(System.in);
-        String playerMove, computerMove;
-        int randomInt;
-
-        // ход игрока
-        System.out.println("Введите: rock paper или scissors");
+        String playerMove;
+        System.out.println("Введите: rock paper или scissors или первую букву r p или s");
         playerMove = scanner.nextLine();
-
-        // ход компьютера
-        randomInt = (int) (Math.random() * 3);
-        if (randomInt == 0) {
-            computerMove = "rock";
-        } else if (randomInt == 1) {
-            computerMove = "paper";
-        } else {
-            computerMove = "scissors";
+        playerMove = playerMove.toUpperCase();
+        char first = playerMove.charAt(0);
+        if (first == 'P' || first == 'S' || first == 'R') {
+            switch (first) {
+                case 'P':
+                    return Move.PAPER;
+                case 'S':
+                    return Move.SCISSORS;
+                case 'R':
+                    return Move.ROCK;
+            }
         }
-        System.out.println(computerMove);
-
-        // Кто победил?
-        if (playerMove.equals(computerMove)) {
-            System.out.println("Ничья?");
-        } else if (playerMove.equals("rock") && computerMove.equals("scissors")) {
-            System.out.println("Ты победил");
-        } else if (playerMove.equals("rock") && computerMove.equals("paper")) {
-            System.out.println("Компьютер победил");
-        } else if (playerMove.equals("paper") && computerMove.equals("rock")) {
-            System.out.println("Ты победил");
-        } else if (playerMove.equals("paper") && computerMove.equals("scissors")) {
-            System.out.println("Компьютер победил");
-        } else if (playerMove.equals("scissors") && computerMove.equals("rock")) {
-            System.out.println("Компьютер победил");
-        } else if (playerMove.equals("scissors") && computerMove.equals("paper")) {
-            System.out.println("Ты победил");
-        }
+        return movePlayer();
     }
 }
