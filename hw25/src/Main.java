@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -6,20 +7,25 @@ public class Main {
     }
 
     public static String run() {
-        String str = "";
-        Game game = new Game();
-        System.out.println("-------START GAME-------");
-        System.out.println("Сыграть в сложную версию? введите цифру (1-ДА 2-НЕТ)");
-        Scanner sc = new Scanner(System.in);
-        int num = sc.nextInt();
-        if (num == 1) {
-            game.gameAction();
-        } else if (num == 2) {
-            game.hardGameAction();
-        } else {
-            System.out.println("Не та цифра");
+        try {
+            String str = "";
+            Game game = new Game();
+            System.out.println("-------START GAME-------");
+            System.out.println("Сыграть в сложную версию? введите цифру (1-ДА 2-НЕТ)");
+            Scanner sc = new Scanner(System.in);
+            int num = sc.nextInt();
+            if (num == 2) {
+                game.gameAction();
+            } else if (num == 1) {
+                game.hardGameAction();
+            } else {
+                System.out.println("Не та цифра");
+                return run();
+            }
+            return str;
+        } catch (InputMismatchException e) {
+            System.out.println("Не корректный ввод");
             return run();
         }
-        return str;
     }
 }
