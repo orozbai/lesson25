@@ -6,8 +6,9 @@ public class Main {
     }
 
     public static String run() {
-        String str = "-------START GAME-------";
+        String str = "";
         Game game = new Game();
+        System.out.println("-------START GAME-------");
         System.out.println("Сыграть в сложную версию? введите цифру (1-ДА 2-НЕТ)");
         Scanner sc = new Scanner(System.in);
         int num = sc.nextInt();
